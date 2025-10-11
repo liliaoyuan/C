@@ -1,21 +1,23 @@
-0000000000001180 <by_pointer>:
-    1180:	f3 0f 1e fa          	endbr64
-    1184:	55                   	push   %rbp
-    1185:	48 89 e5             	mov    %rsp,%rbp
-    1188:	48 89 7d f8          	mov    %rdi,-0x8(%rbp)
-    118c:	48 89 75 f0          	mov    %rsi,-0x10(%rbp)
-    1190:	48 8b 45 f8          	mov    -0x8(%rbp),%rax
-    1194:	f2 0f 10 00          	movsd  (%rax),%xmm0
-    1198:	48 8b 45 f0          	mov    -0x10(%rbp),%rax
-    119c:	f2 0f 10 08          	movsd  (%rax),%xmm1
-    11a0:	66 0f 2f c1          	comisd %xmm1,%xmm0
-    11a4:	76 12                	jbe    11b8 <by_pointer+0x38>
-    11a6:	48 8b 45 f8          	mov    -0x8(%rbp),%rax
-    11aa:	f2 0f 10 00          	movsd  (%rax),%xmm0
-    11ae:	48 8b 45 f0          	mov    -0x10(%rbp),%rax
-    11b2:	f2 0f 11 00          	movsd  %xmm0,(%rax)
-    11b6:	eb 10                	jmp    11c8 <by_pointer+0x48>
-    11b8:	48 8b 45 f0          	mov    -0x10(%rbp),%rax
-    11bc:	f2 0f 10 00          	movsd  (%rax),%xmm0
-    11c0:	48 8b 45 f8          	mov    -0x8(%rbp),%rax
-    11c4:	f2 0f 11 00          	movsd  %xmm0,(%rax)
+
+q5.o:     file format elf64-x86-64
+
+
+Disassembly of section .text:
+
+0000000000000000 <by_value>:
+   0:	f3 0f 1e fa          	endbr64
+   4:	55                   	push   %rbp
+   5:	48 89 e5             	mov    %rsp,%rbp
+   8:	f2 0f 11 45 f8       	movsd  %xmm0,-0x8(%rbp)
+   d:	f2 0f 11 4d f0       	movsd  %xmm1,-0x10(%rbp)
+  12:	f2 0f 10 45 f8       	movsd  -0x8(%rbp),%xmm0
+  17:	66 0f 2f 45 f0       	comisd -0x10(%rbp),%xmm0
+  1c:	76 0c                	jbe    2a <by_value+0x2a>
+  1e:	f2 0f 10 45 f8       	movsd  -0x8(%rbp),%xmm0
+  23:	f2 0f 11 45 f0       	movsd  %xmm0,-0x10(%rbp)
+  28:	eb 0a                	jmp    34 <by_value+0x34>
+  2a:	f2 0f 10 45 f0       	movsd  -0x10(%rbp),%xmm0
+  2f:	f2 0f 11 45 f8       	movsd  %xmm0,-0x8(%rbp)
+  34:	90                   	nop
+  35:	5d                   	pop    %rbp
+  36:	c3                   	ret
