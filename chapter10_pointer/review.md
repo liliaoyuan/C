@@ -1,0 +1,137 @@
+1.下面的程序将打印什么内容？
+```C
+#include　<stdio.h>
+int　main(void)
+{
+int　ref[]　=　{　8,　4,　0,　2　};
+int *ptr;
+int　index;
+for　(index　=　0,　ptr　=　ref;　index　<　4;　index++,　ptr++)
+printf("%d %d\n", ref[index], *ptr);
+return　0;
+}
+```
+
+答案：
+8 8
+4 4
+0 0
+
+---
+
+3.在复习题1中，ref的地址是什么？ref + 1是什么意思？++ref指向什
+么？
+
+ref的地址是数组ref中第一个元素的地址。ref + 1表示数组ref中第二个元素的地址。++ref是非法的，因为ref是一个数组名，不能被修改。
+
+++ ref[0] 和 ref[0]++ 分别是什么意思
+++ref[0]表示将ref数组的第一个元素的值加1，然后返回加1后的值。ref[0]++表示先返回ref数组的第一个元素的值，然后将该值加1。
+
+只是执行顺序不同，实际的实现的结果是一样的。举例说明
+假设ref[0]的初始值为5，那么：
+执行++ref[0]后，ref[0]的值变为6，并且返回6。
+执行ref[0]++后，先返回5，然后ref[0]的值变为6。 
+给我一个程序说明
+```C
+#include <stdio.h>
+int main(void) {
+    int ref[] = {5, 4, 0, 2};
+    
+    // 使用++ref[0]
+    int a = ++ref[0];
+    printf("After ++ref[0]: ref[0] = %d, returned value = %d\n", ref[0], a);
+    
+    // 重置ref[0]的值
+    ref[0] = 5;
+    
+    // 使用ref[0]++
+    int b = ref[0]++;
+    printf("After ref[0]++: ref[0] = %d, returned value = %d\n", ref[0], b);
+    
+    return 0;
+}
+```
+上面的输出结果
+After ++ref[0]: ref[0] = 6, returned value = 6
+After ref[0]++: ref[0] = 6, returned value = 5
+
+---
+
+4.在下面的代码中，\*ptr和*(ptr + 2)的值分别是什么？
+a.
+```C
+int *ptr;
+int　torf[2][2]　=　{12,　14,　16};
+ptr　=　torf[0];
+b.
+int * ptr;
+int　fort[2][2]　=　{　{12},　{14,16}　};
+ptr　=　fort[0];
+```
+
+对a *ptr = 12 *(ptr + 2) = 16
+对b *ptr = 12 *(ptr + 2) = 未定义行为，因为fort[0]只有一个元素，访问ptr + 2超出了数组边界。
+验证代码
+```C
+#include <stdio.h>
+
+int main(void) {
+    // 定义和初始化数组
+    // Define and initialize the array
+    int fort[2][2] = {{12}, {14, 16}};
+
+    printf("--- Accessing elements directly using array indices ---\n");
+
+    // 打印 fort[0][1] 和 fort[1][0] 的值
+    // Print the values of fort[0][1] and fort[1][0]
+    printf("Value of fort[0][1] is: %d\n", fort[0][1]);
+    printf("Value of fort[1][0] is: %d\n", fort[1][0]);
+
+    printf("\n--- Printing all elements the recommended way ---\n");
+    // 使用嵌套循环打印所有元素，这是最标准的方法
+    // Using nested loops to print all elements, which is the standard method
+    for (int i = 0; i < 2; i++) {
+        for (int j = 0; j < 2; j++) {
+            printf("fort[%d][%d] = %d\n", i, j, fort[i][j]);
+        }
+    }
+
+    return 0;
+}
+```
+
+```bash
+--- Accessing elements directly using array indices ---
+Value of fort[0][1] is: 0
+Value of fort[1][0] is: 14
+
+--- Printing all elements the recommended way ---
+fort[0][0] = 12
+fort[0][1] = 0
+fort[1][0] = 14
+fort[1][1] = 16
+```
+由此看出来，对于GCC，*（prt+2）并未超界面，因为整体内存排列中，数组并没有越界
+
+---
+
+6.假设有下面的声明：
+int grid[30][100];
+a.用1种写法表示grid[22][56]
+b.用2种写法表示grid[22][0]
+c.用3种写法表示grid[0][0]
+
+a = *（grid[22]+56）
+b = * grid[22] /*grid[22] [0]
+c = *grid [0] / *grid[0][0]/grid[0][0]
+
+---
+
+7.正确声明以下各变量：
+a.digits是一个内含10个int类型值的数组
+b.rates是一个内含6个float类型值的数组
+c.mat是一个内含3个元素的数组，每个元素都是内含5个整数的数组
+d.psa是一个内含20个元素的数组，每个元素都是指向int的指针
+e.pstr是一个指向数组的指针，该数组内含20个char类型的值
+
+---
