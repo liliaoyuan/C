@@ -1,0 +1,82 @@
+
+q5.o:     file format elf64-x86-64
+
+
+Disassembly of section .text:
+
+0000000000000000 <by_value>:
+   0:	f3 0f 1e fa          	endbr64
+   4:	55                   	push   %rbp
+   5:	48 89 e5             	mov    %rsp,%rbp
+   8:	f2 0f 11 45 f8       	movsd  %xmm0,-0x8(%rbp)
+   d:	f2 0f 11 4d f0       	movsd  %xmm1,-0x10(%rbp)
+  12:	f2 0f 10 45 f8       	movsd  -0x8(%rbp),%xmm0
+  17:	66 0f 2f 45 f0       	comisd -0x10(%rbp),%xmm0
+  1c:	76 0c                	jbe    2a <by_value+0x2a>
+  1e:	f2 0f 10 45 f8       	movsd  -0x8(%rbp),%xmm0
+  23:	f2 0f 11 45 f0       	movsd  %xmm0,-0x10(%rbp)
+  28:	eb 0a                	jmp    34 <by_value+0x34>
+  2a:	f2 0f 10 45 f0       	movsd  -0x10(%rbp),%xmm0
+  2f:	f2 0f 11 45 f8       	movsd  %xmm0,-0x8(%rbp)
+  34:	90                   	nop
+  35:	5d                   	pop    %rbp
+  36:	c3                   	ret
+
+0000000000000037 <by_pointer>:
+  37:	f3 0f 1e fa          	endbr64
+  3b:	55                   	push   %rbp
+  3c:	48 89 e5             	mov    %rsp,%rbp
+  3f:	48 89 7d f8          	mov    %rdi,-0x8(%rbp)
+  43:	48 89 75 f0          	mov    %rsi,-0x10(%rbp)
+  47:	48 8b 45 f8          	mov    -0x8(%rbp),%rax
+  4b:	f2 0f 10 00          	movsd  (%rax),%xmm0
+  4f:	48 8b 45 f0          	mov    -0x10(%rbp),%rax
+  53:	f2 0f 10 08          	movsd  (%rax),%xmm1
+  57:	66 0f 2f c1          	comisd %xmm1,%xmm0
+  5b:	76 12                	jbe    6f <by_pointer+0x38>
+  5d:	48 8b 45 f8          	mov    -0x8(%rbp),%rax
+  61:	f2 0f 10 00          	movsd  (%rax),%xmm0
+  65:	48 8b 45 f0          	mov    -0x10(%rbp),%rax
+  69:	f2 0f 11 00          	movsd  %xmm0,(%rax)
+  6d:	eb 10                	jmp    7f <by_pointer+0x48>
+  6f:	48 8b 45 f0          	mov    -0x10(%rbp),%rax
+  73:	f2 0f 10 00          	movsd  (%rax),%xmm0
+  77:	48 8b 45 f8          	mov    -0x8(%rbp),%rax
+  7b:	f2 0f 11 00          	movsd  %xmm0,(%rax)
+  7f:	90                   	nop
+  80:	5d                   	pop    %rbp
+  81:	c3                   	ret
+
+0000000000000082 <main>:
+  82:	f3 0f 1e fa          	endbr64
+  86:	55                   	push   %rbp
+  87:	48 89 e5             	mov    %rsp,%rbp
+  8a:	48 83 ec 20          	sub    $0x20,%rsp
+  8e:	64 48 8b 04 25 28 00 	mov    %fs:0x28,%rax
+  95:	00 00 
+  97:	48 89 45 f8          	mov    %rax,-0x8(%rbp)
+  9b:	31 c0                	xor    %eax,%eax
+  9d:	f2 0f 10 05 00 00 00 	movsd  0x0(%rip),%xmm0        # a5 <main+0x23>
+  a4:	00 
+  a5:	f2 0f 11 45 e8       	movsd  %xmm0,-0x18(%rbp)
+  aa:	f2 0f 10 05 00 00 00 	movsd  0x0(%rip),%xmm0        # b2 <main+0x30>
+  b1:	00 
+  b2:	f2 0f 11 45 f0       	movsd  %xmm0,-0x10(%rbp)
+  b7:	f2 0f 10 45 f0       	movsd  -0x10(%rbp),%xmm0
+  bc:	48 8b 45 e8          	mov    -0x18(%rbp),%rax
+  c0:	66 0f 28 c8          	movapd %xmm0,%xmm1
+  c4:	66 48 0f 6e c0       	movq   %rax,%xmm0
+  c9:	e8 00 00 00 00       	call   ce <main+0x4c>
+  ce:	48 8d 55 f0          	lea    -0x10(%rbp),%rdx
+  d2:	48 8d 45 e8          	lea    -0x18(%rbp),%rax
+  d6:	48 89 d6             	mov    %rdx,%rsi
+  d9:	48 89 c7             	mov    %rax,%rdi
+  dc:	e8 00 00 00 00       	call   e1 <main+0x5f>
+  e1:	b8 00 00 00 00       	mov    $0x0,%eax
+  e6:	48 8b 55 f8          	mov    -0x8(%rbp),%rdx
+  ea:	64 48 2b 14 25 28 00 	sub    %fs:0x28,%rdx
+  f1:	00 00 
+  f3:	74 05                	je     fa <main+0x78>
+  f5:	e8 00 00 00 00       	call   fa <main+0x78>
+  fa:	c9                   	leave
+  fb:	c3                   	ret

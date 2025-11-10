@@ -19,3 +19,6 @@
     11bc:	f2 0f 10 00          	movsd  (%rax),%xmm0
     11c0:	48 8b 45 f8          	mov    -0x8(%rbp),%rax
     11c4:	f2 0f 11 00          	movsd  %xmm0,(%rax)
+    7f:	90                   	    nop
+    80:	5d                   	    pop    %rbp
+    81:	c3                   	    ret
