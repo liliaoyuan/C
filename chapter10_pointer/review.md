@@ -135,3 +135,93 @@ d.psa是一个内含20个元素的数组，每个元素都是指向int的指针
 e.pstr是一个指向数组的指针，该数组内含20个char类型的值
 
 ---
+8.
+a.声明一个内含6个int类型值的数组，并初始化各元素为1、2、4、8、16、32 
+
+b.用数组表示法表示a声明的数组的第3个元素（其值为4） 
+
+c.假设编译器支持C99/C11标准，声明一个内含100个int类型值的数组， 并初始化最后一个元素为-1，其他元素不考虑 
+
+d.假设编译器支持C99/C11标准，声明一个内含100个int类型值的数组，并初始化下标为5、10、11、12、3的元素为101，其他元素不考虑
+
+考察C99新的定义特性
+
+```C
+#include<stdio.h>
+void main(){
+    int digit[10] = {1，2，4，8，16，32}; // a 
+    // int digit = {[2]=4};
+    // int C= {[99]=-1};
+    // int d = {[5,10,11,12]=101};
+    int digit = {[2] = 4};          // 只初始化索引为2的元素
+    int c[100] = {[99] = -1};       // 只初始化最后一个元素
+    int d[100] = {[5] = 101, [10] = 101, [11] = 101, [12] = 101};
+
+    return 0;
+
+}
+
+```
+---
+10.假设有下面的声明：
+float rootbeer[10], things[10][5], *pf, value = 2.2;
+int i = 3; 
+
+判断以下各项是否有效： 
+
+a.rootbeer[2] = value; 
+
+b.scanf("%f", &rootbeer ); 
+
+c.rootbeer = value; 
+
+d.printf("%f", rootbeer); 
+
+e.things[4][4] = rootbeer[3]; 
+
+f.things[5] = rootbeer; 
+
+g.pf = value; 
+
+h.pf = rootbeer;  
+
+考察指针数组和数组指针的区别
+
+a correct float = float
+
+b correct scanf 标准格式是 scanf("指向得变量格式"，地址/指针) scanf("f",&a) 接受a作为地址 这里应该是scanf("f",rootbeer)或者scanf("f",&rootbeer[0]
+&rootbeer指向的是数组的地址 他的格式是 float10*
+
+c incorrect int 不等于 float
+
+d incorrect 同b
+
+e correct 
+
+f incorrect 左值中，数组退化位一个地址 
+
+g incorrect pf是一个int
+
+h correct rootbeer是一个地址值
+
+这个例题考察 当数组名在表达式中使用（不是 sizeof 或取地址 & 的情形），它会自动退化为指向首元素的指针。
+
+同时还有语义和物理上的区别
+物理上地址一视同仁的被抽象成longint
+
+但是C编译器会将这些指针变量类型分类，来更好地保证内存空间的有效利用
+
+```C
+#include <stdio.h>
+
+int main() {
+    float *pf;
+    long addr = 0x7fff12345678; // 假设一个地址
+
+    pf = addr;      // ❌ 编译错误
+    pf = (float*)addr; // ✅ 需要强制类型转换
+}
+
+```
+
+---
