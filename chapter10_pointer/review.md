@@ -223,5 +223,35 @@ int main() {
 }
 
 ```
+12. 下面声明了 3 个数组：
+
+```c
+double trots[20];
+short clops[10][30];
+long shots[5][10][15];
+```
+
+a. 分别以传统方式和以变长数组为参数的方式编写处理 trots 数组的 void 函数原型和函数调用
+
+b. 分别以传统方式和以变长数组为参数的方式编写处理 clops 数组的 void 函数原型和函数调用
+
+c. 分别以传统方式和以变长数组为参数的方式编写处理 shots 数组的 void 函数原型和函数调用
 
 ---
+这里考察实际上就是数组参数的用法，大同小异 仅仅对a做处理
+
+```C
+// 传统方式
+void process_trots(double arr[], int n);
+// 调用：
+process_trots(trots, 20);
+
+// 变长数组方式
+void process_trots_vla(int n, double arr[n]);
+// 调用：
+process_trots_vla(20, trots);
+```
+
+数组作为形参数的要素就是数组名以及长度当然 
+这样的声明方式意义在于 
+变长数组的意义其实在于多维数组
