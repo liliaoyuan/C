@@ -1,0 +1,9 @@
+# 忽略所有在 chapter9_function 目录中没有扩展名的文件
+# (这会匹配 mmap 但不会匹配 mmap.c)
+chapter9_function/*
+!chapter9_function/*.*
+
+# 或者，如果您知道所有C程序的源文件
+# 都可以编译成没有扩展名的文件，可以更通用地：
+# 假设您的源文件是 'mmap.c'
+/chapter9_function/mmap
