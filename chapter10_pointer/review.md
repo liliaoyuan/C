@@ -22,7 +22,11 @@ return　0;
 3.在复习题1中，ref的地址是什么？ref + 1是什么意思？++ref指向什
 么？
 
-ref的地址是数组ref中第一个元素的地址。ref + 1表示数组ref中第二个元素的地址。++ref是非法的，因为ref是一个数组名，不能被修改。
+ref的地址是数组ref中第一个元素的地址 
+
+ref + 1表示数组ref中第二个元素的地址。 
+
+++ref是非法的，因为ref是一个数组名，不能被修改。
 
 ++ ref[0] 和 ref[0]++ 分别是什么意思
 ++ref[0]表示将ref数组的第一个元素的值加1，然后返回加1后的值。ref[0]++表示先返回ref数组的第一个元素的值，然后将该值加1。
@@ -122,8 +126,8 @@ b.用2种写法表示grid[22][0]
 c.用3种写法表示grid[0][0]
 
 a = *（grid[22]+56）
-b = * grid[22] /*grid[22] [0]
-c = *grid [0] / *grid[0][0]/grid[0][0]
+b = * grid[22] /grid[22][0]/**(grid+22) note that \*\(\*grid+22）=*(&(grid[0]+22))= grid[0][22]
+c = *grid [0] / grid[0][0]/**grid
 
 ---
 
@@ -134,162 +138,128 @@ c.mat是一个内含3个元素的数组，每个元素都是内含5个整数的�
 d.psa是一个内含20个元素的数组，每个元素都是指向int的指针
 e.pstr是一个指向数组的指针，该数组内含20个char类型的值
 
----
-8.
-a.声明一个内含6个int类型值的数组，并初始化各元素为1、2、4、8、16、32 
-
-b.用数组表示法表示a声明的数组的第3个元素（其值为4） 
-
-c.假设编译器支持C99/C11标准，声明一个内含100个int类型值的数组， 并初始化最后一个元素为-1，其他元素不考虑 
-
-d.假设编译器支持C99/C11标准，声明一个内含100个int类型值的数组，并初始化下标为5、10、11、12、3的元素为101，其他元素不考虑
-
-考察C99新的定义特性
-
 ```C
 #include<stdio.h>
-void main(){
-    int digit[10] = {1，2，4，8，16，32}; // a 
-    // int digit = {[2]=4};
-    // int C= {[99]=-1};
-    // int d = {[5,10,11,12]=101};
-    int digit = {[2] = 4};          // 只初始化索引为2的元素
-    int c[100] = {[99] = -1};       // 只初始化最后一个元素
-    int d[100] = {[5] = 101, [10] = 101, [11] = 101, [12] = 101};
-
+int main() {
+    int digits[10] ;
+    float rates[6] ;
+    // int mat[3] = {a[5],b[5],c[5]};
+    int mat[3][5]
+    int *psa[20]; // 理解psa结合 *psa[20]->psa[20]数组 —> *psa [20]数组
+    char (*pstr)[20]; 
     return 0;
-
-}
-
+     }
 ```
 ---
+a.声明一个内含6个int类型值的数组，并初始化各元素为1、2、4、8、
+16、32
+b.用数组表示法表示a声明的数组的第3个元素（其值为4）
+c.假设编译器支持C99/C11标准，声明一个内含100个int类型值的数组，
+并初始化最后一个元素为-1，其他元素不考虑
+d.假设编译器支持C99/C11标准，声明一个内含100个int类型值的数组，
+并初始化下标为5、10、11、12、3的元素为101，其他元素不考虑
+
+```C
+#include<stdio.h>{
+    int main(){
+        int a[6] = {1,2,4,6,8,16,32};
+        // a[2] = {4} should be a[2] = 4 but this is equality
+        int a[6] = {[2] = 4};   
+        int c[100] = {[99]=-1};
+        int d[100] = {[5] = 101, [10] = 101, [11] = 101, [12] = 101, [3] = 101};
+    }
+}
+```
+
+---
+
 10.假设有下面的声明：
+>
 float rootbeer[10], things[10][5], *pf, value = 2.2;
-int i = 3; 
+int i = 3;
+判断以下各项是否有效：
 
-判断以下各项是否有效： 
+a.rootbeer[2] = value;
 
-a.rootbeer[2] = value; 
 
-b.scanf("%f", &rootbeer ); 
+b.scanf("%f", &rootbeer );
 
-c.rootbeer = value; 
 
-d.printf("%f", rootbeer); 
+c.rootbeer = value;
 
-e.things[4][4] = rootbeer[3]; 
+d.printf("%f", rootbeer);
 
-f.things[5] = rootbeer; 
+e.things[4][4] = rootbeer[3];
 
-g.pf = value; 
+f.things[5] = rootbeer;
 
-h.pf = rootbeer;  
+g.pf = value;
 
-考察指针数组和数组指针的区别
+h.pf = rootbeer;
 
-a correct float = float
+a correct
 
-b correct scanf 标准格式是 scanf("指向得变量格式"，地址/指针) scanf("f",&a) 接受a作为地址 这里应该是scanf("f",rootbeer)或者scanf("f",&rootbeer[0]
-&rootbeer指向的是数组的地址 他的格式是 float10*
 
-c incorrect int 不等于 float
+b incorrect scanf def scan("f",&a) a = f.but here rootbeer = float [10] 
 
-d incorrect 同b
+c incorrect rootbeer is a address here so the type is long int 
+
+d correct 
 
 e correct 
 
-f incorrect 左值中，数组退化位一个地址 
+f incorrect things[5] = things[5][i] for i <= 5 
 
-g incorrect pf是一个int
+g incorrect pf is a int address 
 
-h correct rootbeer是一个地址值
+h correct
 
-这个例题考察 当数组名在表达式中使用（不是 sizeof 或取地址 & 的情形），它会自动退化为指向首元素的指针。
-
-同时还有语义和物理上的区别
-物理上地址一视同仁的被抽象成longint
-
-但是C编译器会将这些指针变量类型分类，来更好地保证内存空间的有效利用
+11. 声明一个800 * 600 的int
 
 ```C
-#include <stdio.h>
-
-int main() {
-    float *pf;
-    long addr = 0x7fff12345678; // 假设一个地址
-
-    pf = addr;      // ❌ 编译错误
-    pf = (float*)addr; // ✅ 需要强制类型转换
-}
-
+int a[800][600];
 ```
-12. 下面声明了 3 个数组：
 
-```c
+
+12.下面声明了3个数组：
+```C
 double trots[20];
 short clops[10][30];
 long shots[5][10][15];
 ```
+a.分别以传统方式和以变长数组为参数的方式编写处理trots数组的void
+函数原型和函数调用 
 
-a. 分别以传统方式和以变长数组为参数的方式编写处理 trots 数组的 void 函数原型和函数调用
+b.分别以传统方式和以变长数组为参数的方式编写处理clops数组的void
+函数原型和函数调用 
 
-b. 分别以传统方式和以变长数组为参数的方式编写处理 clops 数组的 void 函数原型和函数调用
+c.分别以传统方式和以变长数组为参数的方式编写处理shots数组的void
+函数原型和函数调用 
 
-c. 分别以传统方式和以变长数组为参数的方式编写处理 shots 数组的 void 函数原型和函数调用
+```C
+void process_trots(const int arr[10]);
+void process_trots_vla(int n, int arr[n]);
+process_trots;
+int n = 20;
+process_trols_vla(n,trots);
+```
+考察的是，数组作为参数的实例
 
 ---
-这里考察实际上就是数组参数的用法，大同小异 仅仅对a做处理
+void show(const double ar[], int n);　　　　　// n是数组元素的个数 
+
+void show2(const double ar2[][3], int n);　　// n是二维数组的行数 
+
+a.编写一个函数调用，把一个内含8、3、9和2的复合字面量传递给
+show()函数。 
+
+b.编写一个函数调用，把一个2行3列的复合字面量（8、3、9作为第1
+行，5、4、1作为第2行）传递给show2()函数。 
 
 ```C
-// 传统方式
-void process_trots(double arr[], int n);
-// 调用：
-process_trots(trots, 20);
 
-// 变长数组方式
-void process_trots_vla(int n, double arr[n]);
-// 调用：
-process_trots_vla(20, trots);
-```
 
-数组作为形参数的要素就是数组名以及长度当然 
 
-这样的声明方式意义在于 灵活取用需要的数据长度
 
-变长数组的意义其实在于多维数组动态取用
 
----
 
-13. 下面有两个函数原型
-```C
-void show(const double ar[], int n);      // n 是数组元素的个数
-void show2(const double ar2[][3], int n); // n 是二维数组的行数
-```
-a. 编写一个函数调用，把一个内含 8、3、9 和 2 的复合字面量传递给 show() 函数
-
-b. 编写一个函数调用，把一个 2 行 3 列的复合字面量（8、3、9 作为第 1 行，5、4、1 作为第 2 行）传递给 show2() 函数
-
----
-```C
-show((double[]){8, 3, 9, 2}, 4); //call a
-show2((double[][3]){{8, 3, 9}, {5, 4, 1}}, 2); //call b
-
-```
-所谓复合自变量即 传入数据的一个简便语法糖
-引入之前的调用方式
-
-```C
-double my_temp_array[] = {8, 3, 9, 2};
-
-// 2. 然后才能传递它
-// 2. Then you can pass it
-show(my_temp_array, 4);
-
-/* 
-new way
-*/
-
-show((double[]){8,3,9,2},4);
-
-```
-BTW 这玩意是在stack存储中，因为他是自动消除的 别以为动态的东西都是堆上完成的
