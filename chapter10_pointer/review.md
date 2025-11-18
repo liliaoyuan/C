@@ -237,11 +237,15 @@ c.分别以传统方式和以变长数组为参数的方式编写处理shots数�
 函数原型和函数调用 
 
 ```C
-void process_trots(const int arr[10]);
-void process_trots_vla(int n, int arr[n]);
-process_trots;
-int n = 20;
-process_trols_vla(n,trots);
+//  函数原型/声明 带参数/不带参数 
+
+void process_trots(double a[],int n);
+void process_trots_vla(int n, double arr[n]); 
+
+// 函数调用 
+
+process_trots(trots,n)
+process_trots_vla(n,trots);
 ```
 考察的是，数组作为参数的实例
 
@@ -257,6 +261,12 @@ b.编写一个函数调用，把一个2行3列的复合字面量（8、3、9作�
 行，5、4、1作为第2行）传递给show2()函数。 
 
 ```C
+
+
+---
+编程题目复习
+
+![排序总结](https://blog-1316337710.cos.ap-hongkong.myqcloud.com//imgimage-20251118152437076.png)
 
 
 
