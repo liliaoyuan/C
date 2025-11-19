@@ -237,16 +237,20 @@ c.分别以传统方式和以变长数组为参数的方式编写处理shots数�
 函数原型和函数调用 
 
 ```C
-//  函数原型/声明 带参数/不带参数 
+//  函数原型/声明 带参数/不带参数 (C99中基本都把声明改写成原型叫法)
 
-void process_trots(double a[],int n);
-void process_trots_vla(int n, double arr[n]); 
+void process_clops(int n,double a[][row]);
+void process_clops(int n, int m, double a[n][m]); 
 
 // 函数调用 
 
-process_trots(trots,n)
-process_trots_vla(n,trots);
+process_clops(n,clops[][30]) / void process_clop (short a[10][30]);
+
+process_clops_vla(10,30,trots);
 ```
+验证结果
+
+
 考察的是，数组作为参数的实例
 
 ---
