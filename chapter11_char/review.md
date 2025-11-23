@@ -84,14 +84,16 @@ strcat(glodwyn, quote) = > glodwyn ='art of it all the way through'
 strcat(samuel,goldwyn) = samuel = ' I read part of it all the way through'
 puts(samuel) = printf( "I read part of it all the way through‘)
 ---
+
 5.下面的练习涉及字符串、循环、指针和递增指针。首先，假设定义了
 下面的函数：
-```C#include　<stdio.h>
-char *pr(char *str)
+```C
+#include　<stdio.h>
+char *pr(char *str) // return type char * name pr
 {
 char *pc;
 pc　=　str;
-while (*pc)
+while (*pc) // excepting you got while(0) all other case same
 putchar(*pc++);
 do　{
 putchar(*--pc);
@@ -99,7 +101,6 @@ putchar(*--pc);
 return　(pc);
 }
 ```
-
 考虑下面的函数调用：
 x = pr("Ho Ho Ho!");
 a.将打印什么？
@@ -110,13 +111,46 @@ e.如果用*--pc替换--*pc，会打印什么？
 f.两个while循环用来测试什么？
 g.如果pr()函数的参数是空字符串，会怎样？
 h.必须在主调函数中做什么，才能让pr()函数正常运行？
----
-C 库函数 int putchar(int char) 把参数 char 指定的字符（一个无符号字符）写入到标准输出 stdout 中
 
+A:
+for `putchat`:C 库函数 int putchar(int char) 把参数 char 指定的字符（一个无符号字符）写入到标准输出 stdout 中 (人话就是输出一个字符)
+for while 只有while（0）会跳出循环
+a. HOHOHO!!HOHOHO
+b. x是个指针
+c. x = &str
+d. *--pc = *--str  --*pc只会是*pc -1 （前者变成指针运算后者变成ASCII）
+e  --*pc会将H变成ASCII码 最终输出长序列值 // 错误 putchar（）依然回将其作为字符打印也就是char(H-1)  = G 打印GOGOGO！
+f  测试中止符号\0
+g 返回空指针
+
+//
+第一个while循环不执行（因为 *pc 立即为 '\0'）
+do-while循环执行一次：--pc 使指针指向 '\0' 之前（未定义行为，危险！）
+可能打印垃圾字符或崩溃
+以上为正确答案
+
+h 自己在设置一个str就好了呗
+
+//
+传入非空字符串 *这个是最重要的
+
+传入的字符串必须以 '\0' 结尾
+
+字符串必须在有效的内存区域
+
+包含 <stdio.h> 头文件
+
+---
 
 
 
 6.假设有如下声明：
-char sign = '$';
-sign占用多少字节的内存？'$'占用多少字节的内存？"$"占用多少字节的
-内存？
+`char sign = '$'`;
+sign占用多少字节的内存？'$'占用多少字节的内存？"$"占用多少字节的内存？
+
+A：
+sign 等于 char 占一个字节 //这个是个变量
+$同样一个字节 // 这个是个常量
+"$"我觉得后面有个/0 占用2字节
+
+---
