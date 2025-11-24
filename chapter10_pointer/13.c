@@ -78,6 +78,12 @@ void main(){
     double x[][];
     x = StoreArr ;
     avgford1 = RoWavg(5,x[0]);
-    avgford2 = Ro
+    avgford2 = RoWavg(5,x[1]);
+    avaford3 = RoWavg(5,x[2]);
+    totalaver = avgAll(3,5,x);
+    max = MAXall(3,5,x);
+    
+    
+
 
 }
