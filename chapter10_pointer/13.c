@@ -20,10 +20,10 @@ e.打印结果
 double *StoreArr(int n,int m,double a[n][m]){
     int i,j;
     double (*ptr)[n][m];
-    for (i = 0 ; i< n,i++;){
+    for (i = 0 ; i< n;i++){
         for (j = 0;j<n;j++){
-            printf"please enter the a data\n");
-            a[i][j] = scanf("f",);
+            printf("please enter the a data\n");
+            a[i][j] = scanf("f",); // int scanf(const char *format, ...) 从标准输入 stdin 读取格式化输入。
         }
     }
     return ptr = a ;
@@ -82,6 +82,7 @@ void main(){
     avaford3 = RoWavg(5,x[2]);
     totalaver = avgAll(3,5,x);
     max = MAXall(3,5,x);
+
     
     
 
