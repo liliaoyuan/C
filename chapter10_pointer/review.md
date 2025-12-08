@@ -248,7 +248,6 @@ process_clops(n,clops[][30]) / void process_clop (short a[10][30]);
 
 process_clops_vla(10,30,trots);
 ```
-验证结果
 
 
 考察的是，数组作为参数的实例
