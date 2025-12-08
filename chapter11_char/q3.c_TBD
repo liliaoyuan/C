@@ -1,0 +1,24 @@
+/*
+考察条件语句+字符串流
+*/
+
+#include<stdio.h>
+void StoreUnemptyWORD(){
+    char a[];
+    int i,n;
+    char word[];
+    printf("please enter N number",n);
+    while(i<n):
+    scanf("%c",a[i]);
+    for(i=0;i<n;i++){
+        if (a[i]!='\t'&'\s'&'\n'){
+            word[i] = a[i];
+        }
+    }
+    return word[];
+
+}
+
+void main(){
+    StoreUnemptyWORD;
+}
