@@ -1,11 +1,13 @@
 /*
 考察条件语句+字符串流
+真正理解scanf的输入输出方式
+理解入股处理主函数于被调函数关系 人机互动中 如何确定输入数组大小 固定还是？
+非空数组条件定义格式 &&
 */
 
 #include<stdio.h>
-void StoreUnemptyWORD(){
-    char a[];
-    int i,n;
+void StoreUnemptyWORD(char a[],int n){
+    int i;
     char word[];
     printf("please enter N number",n);
     while(i<n):
@@ -20,5 +22,6 @@ void StoreUnemptyWORD(){
 }
 
 void main(){
+    char char
     StoreUnemptyWORD;
 }

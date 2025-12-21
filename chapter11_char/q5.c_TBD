@@ -1,0 +1,41 @@
+/*
+1. present string in C 
+2. if there were two arrays in parameter must be made suer the size?
+3. if I want to store a string how to certainlize the 
+*/ 
+# include<stdio.h>
+
+char StimuStr(char a[],char b[],int n,int m){
+    char ch ;
+    for (i=0;i<n;i++){
+        if (a[i]==b[0]){
+            ch = b[0] ;
+        }
+        else {
+            ch = null ;
+        }
+        }
+    }
+    return ch ;
+}
+
+void main(){
+    char a[];
+    char b[];
+    char ch;
+    printf("enter a string")
+    getchar
+
+}
+
+/*
+这个题目值得思考的地方 首先这道题目基本考察的是字符串本质是就是数组
+
+1. 数组作为形参的时候，内存占用大小 （也就是，为什么数组能在未定义大小的情况下作为形参）
+
+Ans：因为这时候退化指针
+
+2. 处理用户定义的未知大小的数组怎么办
+
+Ans:实际工程上 是凭借经验了 比如让用户输入一串字符的场景几家AI 都给的max_size = 100
+*/

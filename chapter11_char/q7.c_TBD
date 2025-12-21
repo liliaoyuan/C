@@ -1,0 +1,17 @@
+/*
+引用赋值还是返回值
+
+人机交互中循环赋值
+
+另一个字符串 最终不会被 S2的终止符给中止？
+*/
+
+#include<stdio.h>
+
+void mystrncpy(char s1[], char s2[], int n){
+    int i;
+    for(i = 0 ; i <n;i ++){
+        s1
+    }
+    
+}
