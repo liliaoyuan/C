@@ -28,8 +28,20 @@ void main(){
     printf("enter the max read numbner you wnat");
     scanf("%d",&maxnumber);
     char arr1[n];
-    StoreUnemptyWORD(arr1,n);
-    for (i=0;i<7;i++){
+    StoreUnemptyWORD(arr1,maxnumber,n);
+    for (i=0;i<n;i++){
         printf("a[%d] is %c\n",i,arr1[i]);
     }
 }
+/*
+这个程序问题
+1. scan(%c) 只是单个字符 不是字符串
+2.    for(i=0;i<=maxnumber;i++){
+        if (word[i]!='\t'&&word[i]!=' '&&word[i]!='\n'){
+            a[i] = word[i];
+        }
+    }
+    这个排序过滤了所有的非空字符，但是也去除了停止符号
+3. 存储容易问题 利用getchar（）和 ch完成数据流交换 而不是再另一个数组上完成 筛选
+
+*/
