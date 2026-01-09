@@ -8,6 +8,25 @@
 */
 #include<stdio.h>
 
-void seam_string(char arr1[]){
+void origin_seq(char arr1[]){
     
 } 
+
+void ASColl_seq(char arr1[]){
+
+}
+
+void inc_seq(){
+
+}
+
+void fwd_seq(){
+
+}
+
+void quit(){
+
+}
+int main(void){
+
+}
